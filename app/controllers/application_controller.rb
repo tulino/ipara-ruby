@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     @@settings=Settings.new 
-    @@settings.PublicKey = "SVD40N0BEHZVY4D" #//"Public Magaza Anahtarı - size mağaza başvurunuz sonucunda gönderilen publik key (açık anahtar) bilgisini kullanınız.",
-    @@settings.PrivateKey = "SVD40N0BEHZVY4D8L9GMQXMDU" #"Private Magaza Anahtarı  - size mağaza başvurunuz sonucunda gönderilen privaye key (gizli anahtar) bilgisini kullanınız.",
+    @@settings.PublicKey = "" #//"Public Magaza Anahtarı - size mağaza başvurunuz sonucunda gönderilen publik key (açık anahtar) bilgisini kullanınız.",
+    @@settings.PrivateKey = "" #"Private Magaza Anahtarı  - size mağaza başvurunuz sonucunda gönderilen privaye key (gizli anahtar) bilgisini kullanınız.",
     @@settings.BaseUrl = "https://apitest.ipara.com/" #iPara web servisleri API url'lerinin başlangıç bilgisidir. Restful web servis isteklerini takip eden kodlar halinde bulacaksınız.
                                         # Örneğin "https://api.ipara.com/" + "/rest/payment/auth"  = "https://api.ipara.com/rest/payment/auth" 
     @@settings.Version = "1.0" # Kullandığınız iPara API versiyonudur. 
