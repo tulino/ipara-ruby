@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IPara Developer Portal</title>
+    <%= csrf_meta_tags %>
+
+  <link href="/content/css/bootstrap.css" rel="stylesheet">
+  <link href="/content/css/Site.css" rel="stylesheet">
+  
+
+  </head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+                <img src="/images/iPara_disi-01.png" width="10%" height="10%" />
+         <div class="navbar-collapse collapse">
+
+                   <ul class="nav navbar-nav">
+                <li>          <%= link_to '3D Ödeme', controller: 'home', action: 'index' %>
+               </li><li>      <%= link_to '(Non-3D) Ödeme ', controller: 'home', action: 'apiPayment' %>
+               </li><li>      <%= link_to 'Ödeme Sorgulama', controller: 'home', action: 'paymentinqury' %>
+               </li><li>      <%= link_to 'Bin Sorgulama ', controller: 'home', action: 'bininqury' %>
+               </li><li>      <%= link_to 'Cüzdana Kart Ekle', controller: 'home', action: 'addCardToWallet' %>
+               </li><li>      <%= link_to 'Cüzdandaki Kartları Listele', controller: 'home', action: 'getCardFromWallet' %>
+               </li><li>      <%= link_to 'Cüzdandan Kart Sil', controller: 'home', action: 'deleteCardFromWallet' %>
+               </li><li>      <%= link_to 'Cüzdandaki Kart (Tek Tıkla) İle Ödeme', controller: 'home', action: 'apiPaymentWithWallet' %></li>
+
+                    <%# <li>@Html.ActionLink("z", "Index", "Home")</li>
+                    <li>@Html.ActionLink("(Non-3D) Ödeme ", "ApiPayment", "Home")</li>
+                    <li>@Html.ActionLink("Ödeme Sorgulama", "PaymentInqury", "Home")</li>
+                    <li>@Html.ActionLink("Bin Sorgulama", "BinInqury", "Home")</li>
+                    <li>@Html.ActionLink("Cüzdana Kart Ekle", "AddCardToWallet", "Home")</li>
+                    <li>@Html.ActionLink("Cüzdandaki Kartları Listele", "GetCardFromWallet", "Home")</li>
+                    <li>@Html.ActionLink("Cüzdandan Kart Sil", "DeleteCardFromWallet", "Home")</li>
+                    <li>@Html.ActionLink("Cüzdandaki Kart (Tek Tıkla) İle Ödeme", "ApiPaymentWithWallet", "Home")</li> %>
+    </ul>
+            </div>
+        </div>
+    </div>
+<div class="container body-content">
+
+    <br />
+    <br />
+    <br />
+   <%= yield %>
+    <hr/>
+    <footer>
+        <p>&copy; 2017 - iPara</p>
+    </footer>
+</div>
+</body>
+</html>
