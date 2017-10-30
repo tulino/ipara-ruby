@@ -125,7 +125,7 @@ class HomeController < ApplicationController
     req.Products << p
 
     #endregion
-     @@settings.BaseUrl= "https://apitest.ipara.com/"
+     @@settings.BaseUrl= "https://api.ipara.com/"
       @returnData= req.execute(req,@@settings)
       end
   else
