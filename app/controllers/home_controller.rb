@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if request.post?
-      @@settings.BaseUrl="https://entegrasyon.ipara.com/3dgate"
+      @@settings.BaseUrl="https://www.ipara.com/3dgate"
       req = Threedpaymentrequest.new 
       req.OrderId = SecureRandom.uuid
       req.Echo = "Echo"
