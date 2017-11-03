@@ -1,7 +1,7 @@
 iPara Ruby On Rails Client Kütüphanesi
 ===================
 
-iPara Ruby On Rails Client Kütüphanesidir. iPara API'lerine çok hızlı bir şekilde bağlanmanızı sağlayan bu projeyi indirip hızlıca inceliyebilirsiniz. 
+iPara Ruby On Rails Client Kütüphanesidir. iPara API'lerine çok hızlı bir şekilde bağlanmanızı sağlayan bu projeyi indirip hızlıca inceleyebilirsiniz. 
 
 
 ## Kullanım
