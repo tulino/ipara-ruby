@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
   def index
     if request.post?
-      @@settings.BaseUrl="https://www.ipara.com/3dgate"
-      req = Threedpaymentrequest.new 
+      req = Threedpaymentrequest.new
       req.OrderId = SecureRandom.uuid
       req.Echo = "Echo"
       req.Mode = @@settings.Mode
@@ -51,7 +50,7 @@ class HomeController < ApplicationController
       if Core::Helper::Validate3DReturn(paymentresponse,@@settings)
     #ApiPaymentResponse çağrılacak
     req=Threedpaymentcompleterequest.new
-    
+
     req.OrderId = params[:orderId]
     req.Echo = "Echo"
     req.Mode =  @@settings.Mode
@@ -68,9 +67,9 @@ class HomeController < ApplicationController
     req.UserId=""
     req.CardId=""
 
-    
+
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new 
+    req.Purchaser = Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -82,7 +81,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new 
+    req.Purchaser.Invoiceaddress = Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -97,7 +96,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new 
+    req.Purchaser.Shippingaddress = Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -110,14 +109,14 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new 
+    p =Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new 
+    p =Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"
@@ -129,15 +128,48 @@ class HomeController < ApplicationController
       @returnData= req.execute(req,@@settings)
       end
   else
-  end 
+  end
   end
 
   def threeDResultFail
-    @returnData= params
+    if (params != nil)
+      output = "<?xml version='1.0' encoding='UTF-8' ?>"
+      output += "<authResponse>"
+      if(params[:echo] != nil)
+        output += "<echo>" + params[:echo] + "</echo>"
+      end
+      if(params[:result] != nil)
+        output += "<result>" + params[:result] + "</result>"
+      end
+      if(params[:amount] != nil)
+        output += "<amount>" + params[:amount] + "</amount>"
+      end
+      if(params[:publicKey] != nil)
+        output += "<publicKey>" + params[:publicKey] + "</publicKey>"
+      end
+      if(params[:orderId] != nil)
+        output += "<orderId>" + params[:orderId] + "</orderId>"
+      end
+      if(params[:mode] != nil)
+        output += "<mode>" + params[:mode] + "</mode>"
+      end
+      if(params[:errorCode] != nil)
+        output += "<errorCode>" + params[:errorCode] + "</errorCode>"
+      end
+      if(params[:errorMessage] != nil)
+        output += "<errorMessage>" + params[:errorMessage] + "</errorMessage>"
+      end
+      output += "</authResponse>"
+      puts "XML OUTPUT : " + output
+      output = Core::Helper::formatXMLOutput(output)
+      @returnData = output
+    else
+      @returnData = "nil"
+    end
   end
 
   def bininqury
-    
+
     if request.post?
       req=Binnumberrequest.new
       req.binNumber =  params[:binNumber]
@@ -147,7 +179,7 @@ class HomeController < ApplicationController
     end
   end
 
-  
+
   def addCardToWallet
     if request.post?
       req=Bankcardcreaterequest.new
@@ -186,7 +218,7 @@ class HomeController < ApplicationController
     end
   end
   def paymentinqury
-       
+
     if request.post?
       req=Paymentinquiryrequest.new
       req.orderId =  params[:orderId]
@@ -198,7 +230,7 @@ class HomeController < ApplicationController
   def apiPayment
     if request.post?
     req=Apipaymentrequest.new
-    
+
     req.OrderId = SecureRandom.uuid
     req.Echo = "Echo"
     req.Mode =  @@settings.Mode
@@ -213,9 +245,9 @@ class HomeController < ApplicationController
     req.UserId=""
     req.CardId=""
 
-    
+
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new 
+    req.Purchaser = Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -227,7 +259,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new 
+    req.Purchaser.Invoiceaddress = Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -242,7 +274,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new 
+    req.Purchaser.Shippingaddress = Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -255,14 +287,14 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new 
+    p =Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new 
+    p =Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"
@@ -279,7 +311,7 @@ class HomeController < ApplicationController
   def apiPaymentWithWallet
     if request.post?
       req=Apipaymentrequest.new
-    
+
     req.OrderId = SecureRandom.uuid
     req.Echo = "Echo"
     req.Mode =  @@settings.Mode
@@ -294,9 +326,9 @@ class HomeController < ApplicationController
     req.UserId=params[:userId]
     req.CardId=params[:cardId]
 
-    
+
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new 
+    req.Purchaser = Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -308,7 +340,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new 
+    req.Purchaser.Invoiceaddress = Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -323,7 +355,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new 
+    req.Purchaser.Shippingaddress = Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -336,14 +368,14 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new 
+    p =Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new 
+    p =Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"

@@ -1,35 +1,44 @@
 
+
 class Apipaymentrequest
-    
+
     attr_accessor :Echo
-    attr_accessor :Mode   
-    attr_accessor :ThreeD   
-    attr_accessor :OrderId   
-    attr_accessor :Amount   
-    attr_accessor :CardOwnerName   
-    attr_accessor :CardNumber   
-    attr_accessor :CardExpireMonth   
-    attr_accessor :CardExpireYear   
-    attr_accessor :Installment   
-    attr_accessor :Cvc   
-    attr_accessor :VendorId   
-    attr_accessor :UserId   
+    attr_accessor :Mode
+    attr_accessor :ThreeD
+    attr_accessor :OrderId
+    attr_accessor :Amount
+    attr_accessor :CardOwnerName
+    attr_accessor :CardNumber
+    attr_accessor :CardExpireMonth
+    attr_accessor :CardExpireYear
+    attr_accessor :Installment
+    attr_accessor :Cvc
+    attr_accessor :VendorId
+    attr_accessor :UserId
     attr_accessor :CardId
-    attr_accessor :ThreeDSecureCode   
-    attr_accessor :Products   
+    attr_accessor :ThreeDSecureCode
+    attr_accessor :Products
     attr_accessor :Purchaser
-      
-       
-         def execute(req,settings)
-           settings.transactionDate=Core::Helper::GetTransactionDateString()
-           settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.CardOwnerName + req.CardNumber + req.CardExpireMonth + req.CardExpireYear + req.Cvc + req.UserId + req.CardId+ req.Purchaser.Name + req.Purchaser.SurName + req.Purchaser.Email + settings.transactionDate
-           result= Core::HttpClient::post(settings.BaseUrl+"rest/payment/auth",Core::Helper::GetHttpHeaders(settings,Core::Helper::Application_xml),self.to_xml(req,settings))
-           return result.force_encoding("UTF-8")  
+
+
+        def execute(req,settings)
+           settings.transactionDate=Core::Helper::GetTransactionDateString();
+           settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.CardOwnerName + req.CardNumber + req.CardExpireMonth + req.CardExpireYear + req.Cvc + req.UserId + req.CardId+ req.Purchaser.Name + req.Purchaser.SurName + req.Purchaser.Email + settings.transactionDate;
+           result= Core::HttpClient::post(
+                                settings.BaseUrl+"rest/payment/auth",
+                                Core::Helper::GetHttpHeaders(settings,Core::Helper::Application_xml),
+                                self.to_xml(req,settings)
+                              );
+          if result != nil
+            return Core::Helper::formatXMLOutput(result)
+          else
+            return "Result is NIL"
+          end
         end
-   
+
          def to_xml(req, settings)
             xml_data_product_part = "";
-            req.Products.each { |product| 
+            req.Products.each { |product|
                xml_data_product_part += "<product>\n" +
                 "	<productCode>" + product.Code + "</productCode>\n" +
                 "	<productName>" + product.Title + "</productName>\n" +
@@ -84,50 +93,50 @@ class Apipaymentrequest
                         <city>"+req.Purchaser.Shippingaddress.CityCode+"</city>
                         <country>"+req.Purchaser.Shippingaddress.CountryCode+"</country>
                         <phoneNumber>"+req.Purchaser.Shippingaddress.PhoneNumber+"</phoneNumber>
-                                
+
                         </shippingAddress>
                         </purchaser>
         </auth> "
         return xml_string
         end
 
-         
-   
+
+
    end
 
    class Purchaser
-    attr_accessor :Name   
-    attr_accessor :SurName   
-    attr_accessor :BirthDate   
-    attr_accessor :Email   
-    attr_accessor :GsmPhone   
-    attr_accessor :IdentityNumber   
+    attr_accessor :Name
+    attr_accessor :SurName
+    attr_accessor :BirthDate
+    attr_accessor :Email
+    attr_accessor :GsmPhone
+    attr_accessor :IdentityNumber
     attr_accessor :ClientIp
 
-    attr_accessor :Invoiceaddress   
-    attr_accessor :Shippingaddress   
-  end   
-   
+    attr_accessor :Invoiceaddress
+    attr_accessor :Shippingaddress
+  end
 
-    
+
+
     class Purchaseraddress
-        
+
         attr_accessor :Name
         attr_accessor :SurName
         attr_accessor :Address
         attr_accessor :ZipCode
         attr_accessor :CityCode
         attr_accessor :IdentityNumber
-        attr_accessor :CountryCode  
+        attr_accessor :CountryCode
         attr_accessor :TaxNumber
         attr_accessor :TaxOffice
         attr_accessor :CompanyName
         attr_accessor :PhoneNumber
-    end 
+    end
 
     class Product
-               attr_accessor :Code 
-               attr_accessor :Title 
-               attr_accessor :Quantity 
+               attr_accessor :Code
+               attr_accessor :Title
+               attr_accessor :Quantity
                attr_accessor :Price
     end

@@ -1,16 +1,16 @@
 class Threedpaymentrequest
 
     attr_accessor :Echo
-    attr_accessor :Mode   
-    attr_accessor :ThreeD   
-    attr_accessor :OrderId   
-    attr_accessor :Amount   
-    attr_accessor :CardOwnerName   
-    attr_accessor :CardNumber   
-    attr_accessor :CardExpireMonth   
-    attr_accessor :CardExpireYear   
-    attr_accessor :Installment   
-    attr_accessor :Cvc   
+    attr_accessor :Mode
+    attr_accessor :ThreeD
+    attr_accessor :OrderId
+    attr_accessor :Amount
+    attr_accessor :CardOwnerName
+    attr_accessor :CardNumber
+    attr_accessor :CardExpireMonth
+    attr_accessor :CardExpireYear
+    attr_accessor :Installment
+    attr_accessor :Cvc
     attr_accessor :PurchaserName
     attr_accessor :PurchaserSurname
     attr_accessor :PurchaserEmail
@@ -19,8 +19,8 @@ class Threedpaymentrequest
     attr_accessor :Version
     attr_accessor :TransactionDate
     attr_accessor :Token
-    attr_accessor :VendorId   
-    attr_accessor :UserId   
+    attr_accessor :VendorId
+    attr_accessor :UserId
     attr_accessor :CardId
 
 
@@ -28,18 +28,18 @@ class Threedpaymentrequest
         settings.transactionDate=Core::Helper::GetTransactionDateString()
         settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.CardOwnerName + req.CardNumber + req.CardExpireMonth + req.CardExpireYear + req.Cvc + req.UserId + req.CardId + req.PurchaserName + req.PurchaserSurname + req.PurchaserEmail + settings.transactionDate
         req.Token=Core::Helper::CreateToken(settings.PublicKey, settings.HashString)
-        return self.toHtmlString(req,settings).force_encoding("UTF-8")  
+        return self.toHtmlString(req,settings).force_encoding("UTF-8")
      end
 
-     
+
    def toHtmlString(req, settings)
-    
+
                 	builder = ""
-        
+
                     builder+="<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">"
                     builder+="<html>"
                     builder+="<body>"
-                    builder+="<form action=\"" + settings.BaseUrl + "\" method=\"post\" id=\"three_d_form\">"
+                    builder+="<form action=\"" + settings.ThreeDInquiryUrl + "\" method=\"post\" id=\"three_d_form\">"
                     builder+="<input type=\"hidden\" name=\"orderId\" value=\"" + req.OrderId + "\"/>"
                     builder+="<input type=\"hidden\" name=\"amount\" value=\"" + req.Amount + "\"/>"
                     builder+="<input type=\"hidden\" name=\"cardOwnerName\" value=\"" + req.CardOwnerName + "\"/>"
@@ -81,4 +81,3 @@ class Threedpaymentrequest
 
 
 end
-
