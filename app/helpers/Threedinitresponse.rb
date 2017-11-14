@@ -1,6 +1,6 @@
 class Threedinitresponse
 
-    
+    #3D secure sonucunda oluşan servis çıktı parametrelerini temsil etmektedir.
   attr_accessor :OrderId
   attr_accessor :Result
   attr_accessor :Amount

@@ -1,6 +1,7 @@
 
 class Threedpaymentcompleterequest
 
+#3D Secure ile ödemenin 2. Adımında gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :Echo
     attr_accessor :Mode
     attr_accessor :ThreeD
@@ -20,6 +21,7 @@ class Threedpaymentcompleterequest
     attr_accessor :Purchaser
 
 
+		#3D secure 2. Adımında ödeme onayı sağlanarak tahsilat gerçekleştirilmesi için gerekli olan servis isteğini temsil eder.
          def execute(req,settings)
            settings.transactionDate=Core::Helper::GetTransactionDateString()
            settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.ThreeDSecureCode + settings.transactionDate       
@@ -27,6 +29,7 @@ class Threedpaymentcompleterequest
            return Core::Helper::formatXMLOutput(result)
         end
 
+		#parametre olarak verilen bilgilerin xml formatında çıktısını almak için kullanılır.
          def to_xml(req, settings)
             xml_data_product_part = "";
             req.Products.each { |product|
@@ -95,6 +98,7 @@ class Threedpaymentcompleterequest
 
    end
 
+   #3D secure 2. adımda ödemenin tamamlanabilmesi için gerekli olan müşteri bilgilerini temsil eder.
    class Purchaser
     attr_accessor :Name
     attr_accessor :SurName
@@ -109,7 +113,7 @@ class Threedpaymentcompleterequest
   end
 
 
-
+	#3D secure 2. adımında ödemenin tamamlanabilmesi için gerekli olan müşteri adres bilgilerini temsil eder.
     class Purchaseraddress
 
         attr_accessor :Name
@@ -125,6 +129,7 @@ class Threedpaymentcompleterequest
         attr_accessor :PhoneNumber
     end
 
+	#3D secure 2. adımında ödemenin tamamlanabilmesi için gerekli olan ürün bilgilerini temsil eder.
     class Product
                attr_accessor :Code
                attr_accessor :Title

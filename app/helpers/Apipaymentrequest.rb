@@ -1,7 +1,7 @@
 
 
 class Apipaymentrequest
-
+	#3D Secure Olmadan Ödeme için gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :Echo
     attr_accessor :Mode
     attr_accessor :ThreeD
@@ -20,7 +20,7 @@ class Apipaymentrequest
     attr_accessor :Products
     attr_accessor :Purchaser
 
-
+		#3D Secure Olmadan Ödeme Servis çağrısını temsil eder.
         def execute(req,settings)
            settings.transactionDate=Core::Helper::GetTransactionDateString();
            settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.CardOwnerName + req.CardNumber + req.CardExpireMonth + req.CardExpireYear + req.Cvc + req.UserId + req.CardId+ req.Purchaser.Name + req.Purchaser.SurName + req.Purchaser.Email + settings.transactionDate;
@@ -104,6 +104,7 @@ class Apipaymentrequest
 
    end
 
+   #Bu sınıf 3D secure olmadan ödeme kısmında müşteri bilgisinin alanlarını temsil eder.
    class Purchaser
     attr_accessor :Name
     attr_accessor :SurName
@@ -119,6 +120,8 @@ class Apipaymentrequest
 
 
 
+   #Bu sınıf 3D secure olmadan ödeme kısmında müşteri adres bilgisinin alanlarını temsil eder.
+ 
     class Purchaseraddress
 
         attr_accessor :Name
@@ -133,6 +136,8 @@ class Apipaymentrequest
         attr_accessor :CompanyName
         attr_accessor :PhoneNumber
     end
+	
+	#Bu sınıf 3D secure olmadan ödeme kısmında ürün bilgisinin alanlarını temsil eder.
 
     class Product
                attr_accessor :Code

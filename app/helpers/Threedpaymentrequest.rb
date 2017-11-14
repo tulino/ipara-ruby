@@ -1,5 +1,6 @@
 class Threedpaymentrequest
 
+	#3D secure ödeme formu başlatmak için gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :Echo
     attr_accessor :Mode
     attr_accessor :ThreeD
@@ -23,7 +24,12 @@ class Threedpaymentrequest
     attr_accessor :UserId
     attr_accessor :CardId
 
-
+	=begin
+		Bu fonksiyon diğer fonksiyonların aksine 3D sınıfı bir formun post edilmesi ile başlar.
+		Bundan dolayı bu fonksiyon "toHtmlString" metodunda ilgili HTML formu oluşturur ve geri döndürür.
+		Bu metod sayesinde 3D ile ödeme formu başlatılmış olur.
+	=end
+	
     def execute(req,settings)
         settings.transactionDate=Core::Helper::GetTransactionDateString()
         settings.HashString = settings.PrivateKey + req.OrderId + req.Amount + req.Mode + req.CardOwnerName + req.CardNumber + req.CardExpireMonth + req.CardExpireYear + req.Cvc + req.UserId + req.CardId + req.PurchaserName + req.PurchaserSurname + req.PurchaserEmail + settings.transactionDate

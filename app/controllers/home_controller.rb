@@ -21,9 +21,8 @@ class HomeController < ApplicationController
       req.PurchaserEmail = "murat@kaya.com"
       req.SuccessUrl = "http://localhost:3000/home/threeDResultSuccess"
       req.FailUrl = "http://localhost:3000/home/threeDResultFail"
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #3D formunun 1. Adımının başlatılması için istek çağrısının yapıldığı kısımdır.
       render inline: @returnData
-
     else
       end
   end
@@ -125,12 +124,13 @@ class HomeController < ApplicationController
 
     #endregion
      @@settings.BaseUrl= "https://api.ipara.com/"
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #3D formunun 2. Adımında ödeme işleminin tamamlanması için başlatılan istek çağrısının yapıldığı kısımdır.
       end
   else
   end
   end
 
+  #3D secure ödeme sonucu başarısız olup, hata mesajının son kullanıcıya gösterildiği kısımdır.
   def threeDResultFail
     if (params != nil)
       output = "<?xml version='1.0' encoding='UTF-8' ?>"
@@ -173,7 +173,7 @@ class HomeController < ApplicationController
     if request.post?
       req=Binnumberrequest.new
       req.binNumber =  params[:binNumber]
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #Bin sorgulama api çağırısının yapıldığı kısımdır.
 
     else
     end
@@ -190,7 +190,7 @@ class HomeController < ApplicationController
       req.cardExpireMonth = params[:month]
       req.cardExpireYear = params[:year]
       req.clientIp = "127.0.0.1"
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #Cüzdana kart ekleme api çağırısının yapıldığı kısımdır.
 
     else
     end
@@ -201,7 +201,7 @@ class HomeController < ApplicationController
       req.userId = params[:userId]
       req.cardId = params[:cardId]
        req.clientIp = "127.0.0.1"
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #Cüzdanda bulunan kartları getirmek için yapılan api çağırısını temsil etmektedir.
 
     else
     end
@@ -212,7 +212,7 @@ class HomeController < ApplicationController
       req.userId = params[:userId]
       req.cardId = params[:cardId]
        req.clientIp = "127.0.0.1"
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #Cüzdanda bulunan kartı silmek için yapılan api çağırısını temsil etmektedir.
 
     else
     end
@@ -222,7 +222,7 @@ class HomeController < ApplicationController
     if request.post?
       req=Paymentinquiryrequest.new
       req.orderId =  params[:orderId]
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #ödeme sorgulama servisi api çağrısının yapıldığı kısımdır.
 
     else
     end
@@ -303,7 +303,7 @@ class HomeController < ApplicationController
 
     #endregion
 
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #3D secure olmadan ödeme servisinin başladığı kısımdır.
 
     else
     end
@@ -384,7 +384,7 @@ class HomeController < ApplicationController
 
     #endregion
 
-      @returnData= req.execute(req,@@settings)
+      @returnData= req.execute(req,@@settings) #Cüzdandaki kart ile ödeme yapma api çağrısının yapıldığı kısımdır.
 
     else
     end

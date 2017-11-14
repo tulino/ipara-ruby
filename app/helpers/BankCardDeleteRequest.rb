@@ -1,6 +1,7 @@
 
 class Bankcarddeleterequest
     
+	#Cüzdanda kayıtlı olan kartı silmek için gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :userId
     attr_accessor :cardId
     attr_accessor :clientIp
@@ -8,7 +9,7 @@ class Bankcarddeleterequest
        
          # Nesnenin üretilmesi 
       
-       
+       # Mağazanın, kullanıcının bir kartını veya kayıtlı olan tüm kartlarını silmek istediği zaman kullanabileceği servisi temsil eder.
          def execute(req,settings)
            settings.transactionDate=Core::Helper::GetTransactionDateString()
            settings.HashString = settings.PrivateKey + req.userId + req.cardId + req.clientIp + settings.transactionDate;

@@ -1,11 +1,12 @@
 
 class Paymentinquiryrequest
 
+	# Ödeme sorugulama servisi için gerekli olan servis girdi parametrelerini temsil eder.
      attr_accessor :orderId
 
          # Nesnenin üretilmesi
 
-
+		#Bu servise sorgulanmak istenen ödemenin mağaza sipariş numarası ve mode değeri iletilerek, ödemenin durumu ve ödemenin tutarı öğrenilebileceği servisi temsil eder.
          def execute(req,settings)
            settings.transactionDate=Core::Helper::GetTransactionDateString()
            settings.HashString = settings.PrivateKey + req.orderId + settings.Mode + settings.transactionDate
