@@ -50,7 +50,8 @@ class Threedpaymentcompleterequest
                     <userId>"+req.UserId+"</userId>
                     <cardId>"+req.CardId+"</cardId>
                     <installment>"+req.Installment+"</installment>
-                     <threeD>"+req.ThreeD+"</threeD>
+                    <threeD>"+req.ThreeD+"</threeD>
+                    <threeDSecureCode>"+req.ThreeDSecureCode+"</threeDSecureCode>
                     <orderId>"+req.OrderId+"</orderId>
                     <echo>"+req.Echo+"</echo>
                     <amount>"+req.Amount+"</amount>

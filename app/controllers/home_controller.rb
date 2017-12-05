@@ -62,7 +62,6 @@ class HomeController < ApplicationController
     req.Cvc = "000"
     req.ThreeD = "true"
     req.ThreeDSecureCode=params[:threeDSecureCode].force_encoding("UTF-8")
-    req.ThreeDSecureCode=req.ThreeDSecureCode
     req.UserId=""
     req.CardId=""
 

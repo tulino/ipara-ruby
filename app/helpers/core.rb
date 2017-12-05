@@ -12,11 +12,11 @@ class Helper
     Application_json = "application/json";
 
 	
-	=begin
+=begin
 	Doğru formatta tarih döndüren yardımcı sınıftır. Isteklerde tarih istenen noktalarda bu fonksiyon sonucu kullanılır. 
 	Servis çağrılarında kullanılacak istek zamanı için istenen tarih formatında bu fonksiyon kullanılmalıdır.
 	Bu fonksiyon verdiğimiz tarih değerini iParanın bizden beklemiş olduğu tarih formatına değiştirmektedir.
-	=end
+=end
 	
     def self.GetTransactionDateString()
          return DateTime.now.strftime("%Y-%m-%d %H:%M:%S")
@@ -28,21 +28,22 @@ class Helper
 
     end
 
-	=begin
+=begin
 	Çağrılarda kullanılacak Tokenları oluşturan yardımcı metotdur. 
 	İstek güvenlik bilgisi kullanılacak tüm çağrılarda token oluşturmamız gerekmektedir.
 	Token oluştururken hash bilgisi ve public key alanlarının parametre olarak gönderilmesi gerekmektedir.
 	hashstring alanı servise ait birden fazla alanın birleşmesi sonucu oluşan verileri ve public key mağaza açık anahtarını 
     kullanarak bizlere token üretmemizi sağlar.
-	=end
-    def self.CreateToken(publicKey, hashString)
+=end
+
+def self.CreateToken(publicKey, hashString)
         return publicKey+ ":" +Digest::SHA1.base64digest(hashString)
      end
 	
-	=begin
+=begin
 	Verilen string i SHA1 ile hashleyip Base64 formatına çeviren fonksiyondur. 
 	CreateToken dan farklı olarak token oluşturmaz sadece hash hesaplar
-	=end
+=end
      def self.ComputeHash(hashString)
         return Digest::SHA1.base64digest(hashString)
      end
@@ -60,12 +61,12 @@ class Helper
         return header
     end
 	
-	=begin
+=begin
 	3D akışının ilk adımında yapılan işlemin ardından gelen cevabın doğrulanması adına kullanılacak fonksiyondur.
 	Ödeme cevabı için response içerisinde hash bilgisine bakılarak işlem yapılır.
 	hash bilgisi boş değilse çeşitli parametrelerle hashtext oluşturulur ve hash bilgisi hesaplanır.
 	Hesaplanan hash bilgisi ile cevap sonucunda oluşan istek bilgisinin doğruluğu burada kontrol edilir.
-	=end
+=end
  
     def self.Validate3DReturn(paymentResponse,settings)
 
@@ -115,9 +116,9 @@ class HttpClient
         puts "HEADER.Token: " + header[:'Token']
         puts "HEADER.Version: " + header[:'Version']
         puts "HEADER.transactionDate: " + header[:'transactionDate']
-        response = RestClient.post(url, content, header)
         puts "REQUEST\n"
         puts content
+          response = RestClient.post(url, content, header)
         if response == nil
           puts "RESPONSE IS NIL";
         else

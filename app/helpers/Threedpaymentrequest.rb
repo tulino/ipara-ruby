@@ -1,3 +1,9 @@
+=begin
+		Bu fonksiyon diğer fonksiyonların aksine 3D sınıfı bir formun post edilmesi ile başlar.
+		Bundan dolayı bu fonksiyon toHtmlString metodunda ilgili HTML formu oluşturur ve geri döndürür.
+        Bu metod sayesinde 3D ile ödeme formu başlatılmış olur.
+=end
+
 class Threedpaymentrequest
 
 	#3D secure ödeme formu başlatmak için gerekli olan servis girdi parametrelerini temsil eder.
@@ -24,11 +30,7 @@ class Threedpaymentrequest
     attr_accessor :UserId
     attr_accessor :CardId
 
-	=begin
-		Bu fonksiyon diğer fonksiyonların aksine 3D sınıfı bir formun post edilmesi ile başlar.
-		Bundan dolayı bu fonksiyon "toHtmlString" metodunda ilgili HTML formu oluşturur ve geri döndürür.
-		Bu metod sayesinde 3D ile ödeme formu başlatılmış olur.
-	=end
+
 	
     def execute(req,settings)
         settings.transactionDate=Core::Helper::GetTransactionDateString()
