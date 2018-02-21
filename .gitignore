@@ -23,7 +23,7 @@
 .byebug_history
 
 #visual studio code index changes
-bin\**
+bin/**
 .yardoc
 */.yardoc
 .vscode
