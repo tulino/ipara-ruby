@@ -19,6 +19,10 @@ iPara servislerini kullanabilmek için [iPara'ya](https://www.ipara.com.tr) üye
 * Servis isteği yaparaken göndermiş olduğunuz alanların başında ve sonunda oluşabilecek boşluk alanlarını kaldırmanızı ( trim() ) önemle rica ederiz. Çünkü bu alanlar oluşacak hash sonuçlarını etkilemektedir.
 * Entegrasyon dahilinde gönderilen input alanlarında, kart numarası alanı dışında kart numarası bilgisi gönderilmesi halinde işlem reddedilecektir.
 
+### Kurulum
+
+Ruby on Rails projesini `<bundle install --binstubs>` komutu ile yapılandırmanız gerekmektedir. Sonrasında Gemfile.json'daki bilgilere uygun olarak gem paketlerinin ve /bin dizininin kurulduğunu göreceksiniz.
+
 ## Önemli Uyarı:
 
 iPara örnek projelerinin amacı, yazılım geliştiricilere iPara servislerine entegre olabilecek bir proje örneği sunmak ve entegrasyon adımlarının daha iyi anlaşılmasını sağlamaktır. Projeleri doğrudan canlı ortamınıza alarak kod değişimi yapmadan kullanmanız için desteğimiz bulunmamaktadır. **Projeyi bir eğitsel kaynak (tutorial) olarak kullanınız.**
