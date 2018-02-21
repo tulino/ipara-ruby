@@ -21,3 +21,11 @@
 /yarn-error.log
 
 .byebug_history
+
+#visual studio code index changes
+bin\**
+.yardoc
+*/.yardoc
+.vscode
+*/.vscode
+Gemfile.lock
