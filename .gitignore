@@ -24,6 +24,8 @@
 
 #visual studio code index changes
 bin/**
+!bin/rails
+!bin/rake
 .yardoc
 */.yardoc
 .vscode
