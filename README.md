@@ -21,7 +21,7 @@ iPara servislerini kullanabilmek için [iPara'ya](https://www.ipara.com.tr) üye
 
 ### Kurulum
 
-Ruby on Rails projesini `<bundle install --binstubs>` komutu ile yapılandırmanız gerekmektedir. Sonrasında Gemfile.json'daki bilgilere uygun olarak gem paketlerinin ve /bin dizininin kurulduğunu göreceksiniz.
+Ruby on Rails projesini `bundle install --binstubs` komutu ile yapılandırmanız gerekmektedir. Sonrasında Gemfile.json'daki bilgilere uygun olarak gem paketlerinin ve /bin dizininin kurulduğunu göreceksiniz.
 
 ## Önemli Uyarı:
 
