@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if request.post?
-      req = Threedpaymentrequest.new
+      req = Ipara::Threedpaymentrequest.new
       req.OrderId = SecureRandom.uuid
       req.Echo = "Echo"
       req.Mode = @@settings.Mode
@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 
   def threeDResultSuccess
     if request.post?
-       paymentresponse = Threedinitresponse.new
+       paymentresponse = Ipara::Threedinitresponse.new
       paymentresponse.OrderId =params[:orderId]
       paymentresponse.Result =params[:result]
       paymentresponse.Amount =params[:amount]
@@ -48,7 +48,7 @@ class HomeController < ApplicationController
           end
       if Core::Helper::Validate3DReturn(paymentresponse,@@settings)
     #ApiPaymentResponse çağrılacak
-    req=Threedpaymentcompleterequest.new
+    req=Ipara::Threedpaymentcompleterequest.new
 
     req.OrderId = params[:orderId]
     req.Echo = "Echo"
@@ -67,7 +67,7 @@ class HomeController < ApplicationController
 
 
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new
+    req.Purchaser = Ipara::Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -79,7 +79,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new
+    req.Purchaser.Invoiceaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -94,7 +94,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new
+    req.Purchaser.Shippingaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -107,14 +107,14 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"
@@ -170,7 +170,7 @@ class HomeController < ApplicationController
   def bininqury
 
     if request.post?
-      req=Binnumberrequest.new
+      req = Ipara::Binnumberrequest.new
       req.binNumber =  params[:binNumber]
       @returnData= req.execute(req,@@settings) #Bin sorgulama api çağırısının yapıldığı kısımdır.
 
@@ -181,7 +181,7 @@ class HomeController < ApplicationController
 
   def addCardToWallet
     if request.post?
-      req=Bankcardcreaterequest.new
+      req = Ipara::Bankcardcreaterequest.new
       req.userId = params[:userId]
       req.cardOwnerName = params[:nameSurname]
       req.cardNumber = params[:cardNumber]
@@ -196,7 +196,7 @@ class HomeController < ApplicationController
   end
   def getCardFromWallet
     if request.post?
-      req=Bankcardinquiryrequest.new
+      req = Ipara::Bankcardinquiryrequest.new
       req.userId = params[:userId]
       req.cardId = params[:cardId]
        req.clientIp = "127.0.0.1"
@@ -207,7 +207,7 @@ class HomeController < ApplicationController
   end
   def deleteCardFromWallet
     if request.post?
-      req=Bankcarddeleterequest.new
+      req = Ipara::Bankcarddeleterequest.new
       req.userId = params[:userId]
       req.cardId = params[:cardId]
        req.clientIp = "127.0.0.1"
@@ -219,7 +219,7 @@ class HomeController < ApplicationController
   def paymentinqury
 
     if request.post?
-      req=Paymentinquiryrequest.new
+      req = Ipara::Paymentinquiryrequest.new
       req.orderId =  params[:orderId]
       @returnData= req.execute(req,@@settings) #ödeme sorgulama servisi api çağrısının yapıldığı kısımdır.
 
@@ -228,7 +228,7 @@ class HomeController < ApplicationController
   end
   def apiPayment
     if request.post?
-    req=Apipaymentrequest.new
+    req = Ipara::Apipaymentrequest.new
 
     req.OrderId = SecureRandom.uuid
     req.Echo = "Echo"
@@ -246,7 +246,7 @@ class HomeController < ApplicationController
 
 
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new
+    req.Purchaser = Ipara::Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -258,7 +258,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new
+    req.Purchaser.Invoiceaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -273,7 +273,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new
+    req.Purchaser.Shippingaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -286,14 +286,14 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"
@@ -309,7 +309,7 @@ class HomeController < ApplicationController
   end
   def apiPaymentWithWallet
     if request.post?
-      req=Apipaymentrequest.new
+      req = Ipara::Apipaymentrequest.new
 
     req.OrderId = SecureRandom.uuid
     req.Echo = "Echo"
@@ -327,7 +327,7 @@ class HomeController < ApplicationController
 
 
     #region Sipariş veren bilgileri
-    req.Purchaser = Purchaser.new
+    req.Purchaser = Ipara::Purchaser.new
     req.Purchaser.Name = "Murat"
     req.Purchaser.SurName = "Kaya"
     req.Purchaser.BirthDate = "1986-07-11"
@@ -339,7 +339,7 @@ class HomeController < ApplicationController
 
     #region Fatura bilgileri
 
-    req.Purchaser.Invoiceaddress = Purchaseraddress.new
+    req.Purchaser.Invoiceaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Invoiceaddress.Name = "Murat"
     req.Purchaser.Invoiceaddress.SurName = "Kaya"
     req.Purchaser.Invoiceaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -354,7 +354,7 @@ class HomeController < ApplicationController
     #endregion
 
     #region Kargo Adresi bilgileri
-    req.Purchaser.Shippingaddress = Purchaseraddress.new
+    req.Purchaser.Shippingaddress = Ipara::Purchaseraddress.new
     req.Purchaser.Shippingaddress.Name = "Murat"
     req.Purchaser.Shippingaddress.SurName = "Kaya"
     req.Purchaser.Shippingaddress.Address = "Mevlüt Pehlivan Mah. Multinet Plaza Şişli"
@@ -367,20 +367,19 @@ class HomeController < ApplicationController
 
     #region Ürün bilgileri
     req.Products = Array.new()
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Telefon"
     p.Code = "TLF0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
 
-    p =Product.new
+    p = Ipara::Product.new
     p.Title = "Bilgisayar"
     p.Code = "BLG0001"
     p.Price = "5000"
     p.Quantity = 1
     req.Products << p
-
     #endregion
 
       @returnData= req.execute(req,@@settings) #Cüzdandaki kart ile ödeme yapma api çağrısının yapıldığı kısımdır.
@@ -388,7 +387,5 @@ class HomeController < ApplicationController
     else
     end
   end
-
-
 
 end

@@ -1,5 +1,5 @@
-
-class Bankcardinquiryrequest
+module Ipara
+  class Bankcardinquiryrequest
     
 	#Cüzdanda bulunan kartları getirmek için gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :userId
@@ -20,4 +20,5 @@ class Bankcardinquiryrequest
          
    
    
-   end
+end
+end

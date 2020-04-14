@@ -1,5 +1,5 @@
-
-class Bankcardcreaterequest
+module Ipara
+  class Bankcardcreaterequest
     # Cüzdana kart ekleme servisi içerisinde kullanılacak alanları temsil etmektedir.
     attr_accessor :userId
     attr_accessor :cardOwnerName
@@ -27,4 +27,5 @@ class Bankcardcreaterequest
          
    
    
-   end
+end
+end

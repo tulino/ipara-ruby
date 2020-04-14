@@ -1,4 +1,5 @@
-class Threedinitresponse
+module  Ipara
+  class Threedinitresponse
 
     #3D secure sonucunda oluşan servis çıktı parametrelerini temsil etmektedir.
   attr_accessor :OrderId
@@ -10,4 +11,5 @@ class Threedinitresponse
   attr_accessor :TransactionDate
   attr_accessor :Hash
   
+end
 end

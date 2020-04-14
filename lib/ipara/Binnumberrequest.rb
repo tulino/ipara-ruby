@@ -1,5 +1,5 @@
-
-class Binnumberrequest
+module Ipara
+  class Binnumberrequest
  
  #Bin Sorgulama servisleri içerisinde kullanılacak olan bin numarasını temsil eder.
   attr_accessor :binNumber
@@ -17,4 +17,5 @@ class Binnumberrequest
 
       
 
+end
 end

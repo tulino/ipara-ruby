@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    require_dependency "ipara"
+    include Ipara
     @@settings=Settings.new
     @@settings.PublicKey = "" #//"Public Magaza Anahtarı - size mağaza başvurunuz sonucunda gönderilen public key (açık anahtar) bilgisini kullanınız.",
     @@settings.PrivateKey = "" #"Private Magaza Anahtarı  - size mağaza başvurunuz sonucunda gönderilen privaye key (gizli anahtar) bilgisini kullanınız.",

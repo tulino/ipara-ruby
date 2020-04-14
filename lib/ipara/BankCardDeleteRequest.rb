@@ -1,5 +1,5 @@
-
-class Bankcarddeleterequest
+module Ipara
+  class Bankcarddeleterequest
     
 	#Cüzdanda kayıtlı olan kartı silmek için gerekli olan servis girdi parametrelerini temsil eder.
     attr_accessor :userId
@@ -20,4 +20,5 @@ class Bankcarddeleterequest
          
    
    
-   end
+end
+end

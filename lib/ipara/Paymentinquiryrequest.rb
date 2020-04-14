@@ -1,5 +1,5 @@
-
-class Paymentinquiryrequest
+module Ipara
+  class Paymentinquiryrequest
 
 	# Ödeme sorugulama servisi için gerekli olan servis girdi parametrelerini temsil eder.
      attr_accessor :orderId
@@ -26,3 +26,4 @@ class Paymentinquiryrequest
 
 
    end
+end
